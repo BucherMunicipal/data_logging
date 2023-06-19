@@ -1,0 +1,13 @@
+[Unit]
+Description=Logging the videos and CAN log files 
+Requires=can_setup.service
+
+[Service]
+Type=simple
+Environment="PATH=/usr/bin:usr/sbin/lsmod:/usr/bin/grep:/home/g/.pyenv/versions/AIPY/bin:/home/g/.pyenv/shims:/home/g/.pyenv/bin:$PATH"
+ExecStart=/home/g/.pyenv/versions/AIPY/bin/python3 /home/g/workdisk/workspace/jetson-deepstream/bscripts/logging/logging_controller.py
+
+
+[Install]
+WantedBy=multi-user.target
+

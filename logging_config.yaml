@@ -1,0 +1,27 @@
+---
+# Data logging settings
+
+logging_settings:
+   - logging_mode: 1                    # a boolean variable - 0 means logging is off and 1 means the device is logging. 
+   - max_log_duration: 600                # maximum video and CAN message logging duration in seconds.
+   - logged_data_dir: /mnt/ssd2/testing   # the full path to the folder in which videos and CAN log files are saved.
+
+
+camera_info:
+   - used_cameras: [front, back]           
+   - front:
+      - path: /dev/video0
+   - back: 
+      - path: /dev/video1
+   - right_nozzle: 
+      - path: /dev/video2
+   - left_nozzle: 
+      - path: /dev/video3
+
+
+device_info:
+   - device_name: Syslogic
+
+
+vehicle_info:
+   - serial_number: SN214929

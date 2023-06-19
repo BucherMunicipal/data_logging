@@ -1,0 +1,12 @@
+[Unit]
+Description=Setting the correct time on the device 
+Requires=can_setup.service
+
+[Service]
+Type=simple
+Environment="PATH=/home/g/.pyenv/versions/AIPY/bin:/home/g/.pyenv/shims:/home/g/.pyenv/bin:$PATH"
+ExecStart=/home/g/.pyenv/versions/AIPY/bin/python /home/g/workdisk/workspace/jetson-deepstream/bscripts/logging/set_device_time/check_device_time.py
+
+
+[Install]
+WantedBy=multi-user.target

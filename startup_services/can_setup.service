@@ -1,0 +1,10 @@
+[Unit]
+Description=CAN setup 
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/g/workdisk/workspace/jetson-deepstream/bscripts/logging/setup_CAN.sh
+
+
+[Install]
+WantedBy=multi-user.target
