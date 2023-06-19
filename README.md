@@ -10,7 +10,7 @@ Logs the videos and CAN signals and saves them as video-log_file pairs similar t
 - [can_logging/](can_logging): has the scripts that log CAN messages and post-process them to have a format live the VBO files. 
 - [find_serial_number/](find_serial_number): contains the script that reads the serial number of the vehicle and saves it in the config file. 
 - [set_device_time/](set_device_time): ensures the device time is synced with the Proemion time by setting it every hour if it drifts.   
-- [video_recording/](video_recording): contains the gstreamer pipleine used to log the camera's input and the python script that runs it.
+- [video_recording/](video_recording): contains the gstreamer pipleine used to record videos and the python script that runs it.
 - [startup_services/](startup_services): contains the systemd services that automate all the functions mentioned above.
 
 
