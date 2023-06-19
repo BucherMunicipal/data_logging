@@ -2,21 +2,22 @@
 # Data logging settings
 
 logging_settings:
-   - logging_mode: 1                    # a boolean variable - 0 means logging is off and 1 means the device is logging. 
-   - max_log_duration: 600                # maximum video and CAN message logging duration in seconds.
-   - logged_data_dir: /mnt/ssd2/testing   # the full path to the folder in which videos and CAN log files are saved.
+   - logging_mode: 0                               # a boolean variable - 0 means logging is off and 1 means the device is logging. 
+   - max_log_duration: 60                         # the maximum video reconding and CAN logging duration in seconds.
+   - logged_data_dir: /mnt/sd-card-1/08_06_2023    # the full path to the folder in which the videos and CAN log files are saved.
+   - overwrite_first_log: 0                        # !!!! NOT implemented yet. Should overwrite the first logs to create space for the new logs when the SD card gets gets full.
 
 
 camera_info:
-   - used_cameras: [front, back]           
+   - used_cameras: [back, left_nozzle]           
    - front:
-      - path: /dev/video0
+      - path: /dev/video3
    - back: 
       - path: /dev/video1
    - right_nozzle: 
       - path: /dev/video2
    - left_nozzle: 
-      - path: /dev/video3
+      - path: /dev/video0
 
 
 device_info:

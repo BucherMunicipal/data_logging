@@ -20,6 +20,9 @@ import yaml
 from yaml.loader import SafeLoader
 import signal
 import sys
+from threading import Thread
+from datasize import DataSize
+
 
 
 
@@ -54,7 +57,7 @@ filters = [
 bus = Bus(interface = 'socketcan', channel = 'can0', bitrate = 250000, can_filters = filters)
 
 # Create a CAN data decoder using the DBC file.
-db = cantools.database.load_file('/home/g/workdisk/workspace/jetson-deepstream/bscripts/logging/logged_can_signals_16_02_2023.DBC')
+db = cantools.database.load_file('/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logged_can_signals_16_02_2023.DBC')
 
 
 
@@ -62,13 +65,13 @@ db = cantools.database.load_file('/home/g/workdisk/workspace/jetson-deepstream/b
 
 def parse_config_file():
     """
-        Reads and returns the vehicle's serial number which will form part of the log file's name, the log duration, and the path to the folder that the log files must be saved in.
+        Reads and returns the vehicle's serial number that will form part of the log file's name, the log duration, the path to the folder that the log files must be saved in, the logging device name and the cameras used.
     """
 
-    with open("/home/g/workdisk/workspace/jetson-deepstream/bscripts/logging/logging_config.yaml", "r") as yamlfile:
+    with open("/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logging_config.yaml", "r") as yamlfile:
         data = yaml.load(yamlfile, Loader=SafeLoader)
         yamlfile.close()
-        return  data['logging_settings'][2]['logged_data_dir'], data['logging_settings'][1]['max_log_duration'], data['vehicle_info'][0]['serial_number']
+        return  data['logging_settings'][2]['logged_data_dir'], data['logging_settings'][1]['max_log_duration'], data['vehicle_info'][0]['serial_number'], data['device_info'][0]['device_name'], " ".join(data['camera_info'][0]['used_cameras'])
 
 
 
@@ -86,6 +89,9 @@ def log_can_messages():
                 # Decode the CAN message.           
                 msg = bus.recv()
                 can_msg_dict = db.decode_message(msg.arbitration_id, msg.data)
+
+
+                # print("**************************************", can_msg_dict)
 
                 # Create a dict with null values except the time.
                 data_dict = dict.fromkeys(columns, np.nan) 
@@ -112,16 +118,30 @@ def log_can_messages():
 
 def signal_handler(sig, frame):
     """
-        Handles the sigint interrupt that can be sent from the logging_controller.py process of the keyboard.
+        Handles the sigint interrupt that can be sent from the logging_controller.py process or the keyboard.
     """
     print("*************************************** Handling Keyboard Interrupt **************************************") 
 
-    with open(file_name, "a+") as f:
-        f.seek(0) # go to the top of the file before reading.
-        # Write the last line to the log file only if it has some data.
-        if len(f.readlines()) > 1:
-            f.write("\n" + ",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
-        f.close()
+    try:
+
+        pool.terminate() # Terminate the processes logging CAN messages 
+    
+        with open(file_name, "a+") as f:
+            f.seek(0) # go to the top of the file before reading.
+            # Write the last line to the log file only if it has some data.
+            if len(f.readlines()) > 1:
+                f.write("\n" + ",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
+            
+            f.close()
+        
+        
+        # Wait for the log file processing to complete before exiting.
+        subprocess.call(['/home/ganindu/.pyenv/versions/AIPY/bin/python3', '/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/can_logging/post_process_can_logs.py', file_name, logging_device, used_cameras])
+
+    except Exception as e: 
+        print("!!!!!!!!!!!!!!!!!!!!!!!! Exception while terminating the CAN message logging", e) 
+
+    print("exiting now")
 
     sys.exit(0)
  
@@ -135,31 +155,54 @@ if __name__ == '__main__':
 
     while True:
 
-        # Create an empty file to be logged to.
-        log_dir, log_duration, serial_number = parse_config_file()
-        file_name = f'{serial_number}_{str("_".join(str(datetime.datetime.now()).split(" ")).split(".")[0][:-2]).replace("-", "_").replace(":", "")}.csv' 
-        file_name = os.path.join(log_dir, file_name)
+        log_dir, log_duration, serial_number, logging_device, used_cameras = parse_config_file()
+
+        # Before starting a new logging session, check if there is enough space left on the SD card. If there isn't, don't log any data
+        if DataSize(os.popen(f"df -H {log_dir} | awk '{{print $4}}'").read().split("\n")[1]) > DataSize(f"{log_duration / 600}G"):
+
+            print("****************** Writing to a CAN log file")
+
+            # Create an empty file to be logged to.
+            file_name = f'{serial_number}_{str("_".join(str(datetime.datetime.now()).split(" ")).split(".")[0][:-2]).replace("-", "_").replace(":", "")}.csv'  
+            
+            file_name = os.path.join(log_dir, file_name)
+            
+            # Write the header row to this file if it is empty.
+            #if not os.path.exists(file_name) or os.stat(file_name).st_size == 0:
+            with open(file_name, "w") as f:
+                f.write(f'{",".join(columns)}\n')
+                f.write(",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
+
+
+            # Create a pool of processes and start it.
+            pool = Pool(processes=8)
+            pool.apply_async(log_can_messages)
+
+            time.sleep(log_duration - 0.2)
+
+            pool.terminate()
+
+            # Write a line of null values (except time) to the log file to know when logging stopped, which is important when syncing log files with videos. 
+            with open(file_name, "a") as f:
+                f.write("\n" + ",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
+                f.close()
+
+
+            # Process this log file to give it a format similar to the vbo files, while starting with the next logging session.
+            thread = Thread(target = lambda: subprocess.Popen(['/home/ganindu/.pyenv/versions/AIPY/bin/python3', '/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/can_logging/post_process_can_logs.py', file_name, logging_device, used_cameras]))
+            thread.start()
+
+
+        # If there is no space left on the device, exit this CAN logging program.
+        else:
+            print("No space left on the device !!!!!!!!!!!!!!!!!!!!!!!")
+
+            try:
+                thread.join() 
+            except:
+                pass
+            sys.exit(0)
         
-        # Write the header row to this file if it is empty.
-        #if not os.path.exists(file_name) or os.stat(file_name).st_size == 0:
-        with open(file_name, "w") as f:
-            f.write(f'{",".join(columns)}\n')
-            f.write(",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
 
-
-        # Create a pool of processes and start it.
-        pool = Pool(processes=8)
-        pool.apply_async(log_can_messages)
-
-        time.sleep(log_duration)
-
-        pool.terminate()
-
-        # Write a line of null values (except time) to the log file to know when logging stopped, which is important when syncing log files with videos. 
-        with open(file_name, "a") as f:
-            f.write("\n" + ",".join([f'{datetime.datetime.now().strftime("%H:%M:%S.%f")[:-5]}00'] + [str(np.nan) for _ in columns[1:]]))
-            f.close()
-   
-
- 
+    
 
