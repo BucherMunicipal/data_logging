@@ -201,6 +201,11 @@ if __name__ == '__main__':
                 thread.join() 
             except:
                 pass
+
+
+            # Send a signal to stop the parent process.
+            os.kill(os.getppid(), signal.SIGINT)
+
             sys.exit(0)
         
 
