@@ -8,8 +8,11 @@
 #
 
 
+set -e
+
+
 # Run the logging controller
-/home/ganindu/.pyenv/versions/AIPY/bin/python3 /mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logging_controller.py &
+/home/ganindu/.pyenv/versions/AIPY/bin/python3 /mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logging_controller.py 
 
 
 # Keep checking until the gpio pin value becomes 0, and then gracefully stop the logging and shut down the device.
@@ -26,3 +29,4 @@ sudo poweroff
 fi
 
 done
+
