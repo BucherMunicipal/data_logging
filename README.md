@@ -45,7 +45,7 @@ Create a pyenv virtual environment with the name ```AIPY```. Inside this venv in
  
 
 
-## How it Works
+## How It Works
 <img src="logging_pipeline.png">
 
 
