@@ -51,19 +51,21 @@ Create a pyenv virtual environment with the name ```AIPY```. Inside this venv in
 
 ## Key Notes 
 
-* Logging only starts after the serial number is found, therefore, since the cycle time of the CAN message that sends the serial number is 3 seconds, it might take up to 3 seconds to start logging when logging for the first time the serial number is set.  
+* **Device space check**: before logging begins, the logging program checks if there is enough space on the device that data will be saved on, if not, it exits and will only restart after the syslogic is rebooted. This also happens everytime before starting a new log file, but in that case, the program waits until it post-processes the previous CAN log file before exiting. 
 
-* With the current setting, the log file duration must be less than or equal to **50 minutes**. To increase this length, the syslogic's hard shutdown interval must be increased so the log files have enough time to me reformatted before the device is powered off. 
+* **Logging delay**: logging only starts after the serial number is found, therefore, since the cycle time of the CAN message that sends the serial number is 3 seconds, it might take up to 3 seconds to start logging when logging for the first time the serial number is set.  
 
-* To automatically stop or start logging while the ```logging``` service is running, set the ```loggig_mode``` in the config file to 0 or 1, respectively, instead of stopping and starting the service. 
+* **Max log file duration**: with the current setting, the log file duration must be less than or equal to **50 minutes**. To increase this length, the syslogic's hard shutdown interval must be increased so the log files have enough time to me reformatted before the device is powered off. 
 
-* Any changes made to the settings in the config file (apart from changing the ```loggig_mode```) will be applied when a new logging session starts.
+* **Stop/start logging**: to automatically stop or start logging while the ```logging``` service is running, set the ```loggig_mode``` in the config file to 0 or 1, respectively, instead of stopping and starting the systemd service. 
 
-* The time in the log files is GMT time because it is set by the Proemion. 
+* **Changing the settings**: any changes made to the settings in the config file (apart from changing the ```loggig_mode```) will be applied when a new logging session starts.
 
-* If the logging is stopped and restarted in the same minute, the new videos and CAN log files overwrite the previous ones.
+* **Log files time zone**: the time in the log files is GMT time because it is set by the Proemion. 
 
-* If the logging service fails, it is automatically restarted after 30 seconds.
+* **File overwrite**: if the logging is stopped and restarted in the same minute, the new videos and CAN log files overwrite the previous ones.
+
+* **Service restart**: if the logging service fails, it is automatically restarted after 30 seconds.
  
  
 
