@@ -55,7 +55,7 @@ Create a pyenv virtual environment with the name ```AIPY```. Inside this venv in
 
 * **Logging delay**: logging only starts after the serial number is found, therefore, since the cycle time of the CAN message that sends the serial number is 3 seconds, it might take up to 3 seconds to start logging when logging for the first time the serial number is set.  
 
-* **Max log file duration**: with the current setting, the log file duration must be less than or equal to **50 minutes**. To increase this length, the syslogic's hard shutdown interval must be increased so the log files have enough time to me reformatted before the device is powered off. 
+* **Max. log file duration**: with the current setting, the log file duration must be less than or equal to **50 minutes**. To increase this length, the syslogic's hard shutdown interval must be increased so the log files have enough time to me reformatted before the device is powered off. 
 
 * **Stop/start logging**: to automatically stop or start logging while the ```logging``` service is running, set the ```loggig_mode``` in the config file to 0 or 1, respectively, instead of stopping and starting the systemd service. 
 
