@@ -32,7 +32,7 @@ columns = [
 "SideBrush2ExtendTMSCS", "SideBrush1RetractTMSCS", "SideBrush2RetractTMSCS", "Nozzle1WaterSprayOnOffTMS", "Nozzle2WaterSprayOnOffTMS", 
 "SideBrush1WaterSprayTMS", "SideBrush2WaterSprayTMS", "WSBMotoronoffTMS", "FanOnTMS", "WorkLight1OnOffTMS", "WorkLight2OnOffTMS", "NozGapOpen", 
 "NozGapClose", "Pause_active", "AutoSweepActive", "EngineType", "EngineSpeed", "RoadSpeedTMSCS", "EngineFuelRateTMSCS", "FanSpeed", "TotalFuelConsumption", "WaterTankLevel", 
-"JVMheartbeat", "JVMALerts", "modbus_id", "pm_sensor_serious_fault", "pm_sensor_fault", "pm_sensor_is_degraded_mode", 
+"JVMheartbeat", "JVMALerts", "GutterSprayOnOff", "AddWaterSprayOnOff", "WaterRe-circOnOff", "modbus_id", "pm_sensor_serious_fault", "pm_sensor_fault", "pm_sensor_is_degraded_mode", 
 "pm_sensor_is_ready", "pm_1", "pm_2_5", "pm_10", "temperature", "firmware_version", "humidity", "error"
 ]
 
