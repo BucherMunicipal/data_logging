@@ -1,0 +1,141 @@
+VERSION ""
+
+
+NS_ :
+  CM_
+  BA_DEF_
+  BA_
+  VAL_
+  BA_DEF_DEF_
+  SIG_VALTYPE_
+
+BS_:
+
+BU_: Vector__XXX
+
+
+BO_ 515 CAN203h_TrackerMsg1: 8 Vector__XXX
+SG_ BrushCurrent : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ LeftBrushPressureCS : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ RightBrushPressureCS : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ SideBrush1MotoronoffTMS : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush2MotoronoffTMS : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush1downTMS : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush2downTMS : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush1ExtendTMSCS : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush1RetractTMSCS : 53|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush2ExtendTMSCS : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush2RetractTMSCS : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WSBMotoronoffTMS : 56|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Nozzle1downTMSCS : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Nozzle2downTMS : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ RearSuction : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ NozGapOpen : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ NozGapClose : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Pause_active : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AutoSweepActive : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 771 CAN303h_TrackerMsg2: 8 Vector__XXX
+SG_ HopperFrameRaiseDownCS : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ ThirdBrushCurrentCS : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ ThirdBrushClockwiseRotateCS : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushCounterClockRotCS : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushTwistClockwiseCS : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushTwistCounterClockCS : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushUpCS : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushDownCS : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushMoveLeftCS : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushMoveRightCS : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ FanOnTMS : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushTiltLeftCS : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ThirdBrushTiltRightCS : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ HighPressureWaterPump : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush1WaterSprayTMS : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SideBrush2WaterSprayTMS : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WorkLight1OnOffTMS : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WorkLight2OnOffTMS : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AddWorkLight1OnOffTMS : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AddWorkLight2OnOffTMS : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ChassisBeaconsTMS : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ RearBeacons1OnOffTMS : 53|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ RearBeacons2OnOffTMS : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AddRearBeacons1OnOffTMS : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AddRearBeacons2OnOffTMS : 56|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WSBWaterSprayOnOffTMS : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Nozzle1WaterSprayOnOffTMS : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Nozzle2WaterSprayOnOffTMS : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ EngineType : 2|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ GutterSprayOnOff : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ AddWaterSprayOnOff : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WaterRe_circOnOff : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1027 CAN403h_TrackerMsg3: 8 Vector__XXX
+SG_ CruiseControlActiveCS : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrivingWithBodyUpCS : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WSEnableCS : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ QuickReverseActiveCS : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ReverseBeeperDisabledCS : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ MachineType : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ RoadSpeedTMSCS : 16|16@1+ (1,0) [0|65535] "km/h" Vector__XXX
+SG_ EngineSpeed : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ EngineFuelRateTMSCS : 48|16@1+ (0.05,0) [0|3276.75] "L/Hr" Vector__XXX
+SG_ DueServiceType : 5|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1284 CAN504h_TrackerErrorMsg4: 8 Vector__XXX
+SG_ JVMALerts : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 1812 JVMStatus: 1 Vector__XXX
+SG_ JVMheartbeat : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1285 CAN505h_TrackerMsg8: 8 Vector__XXX
+SG_ TotalFuelConsumption : 0|32@1+ (0.05,0) [0|214748364.75] "l" Vector__XXX
+SG_ WaterTankLevel : 32|8@1+ (0.5,0) [0|127.5] "%" Vector__XXX
+SG_ FanSpeed : 40|16@1+ (1,0) [0|1] "rpm" Vector__XXX
+
+BO_ 291 CAN123_particle_sensor: 8 Vector__XXX
+SG_ modbus_id : 0|8@1+ (1,0) [0|100] "" Vector__XXX
+SG_ pm_sensor_serious_fault : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ pm_sensor_fault : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ pm_sensor_is_degraded_mode : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ pm_sensor_is_ready : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ pm_1 : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+SG_ pm_2_5 : 32|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+SG_ pm_10 : 48|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+
+BO_ 1110 CAN456_particle_sensor: 8 Vector__XXX
+SG_ modbus_id : 0|8@1+ (1,0) [0|100] "" Vector__XXX
+SG_ firmware_version : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ temperature : 24|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ humidity : 40|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ error : 56|8@1+ (1,0) [0|100] "" Vector__XXX
+
+BO_ 517 CAN202h_VehicleSerialNumber: 8 Vector__XXX
+SG_ EQ_number_high_order : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ EQ_number_low_order : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ EQ_number_mid_order : 56|8@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 258 CAN102_Longitude_Latitude: 8 Vector__XXX
+SG_ Longitude : 0|32@1- (1,0) [-999999999|999999999] "" Vector__XXX
+SG_ Latitude : 32|32@1- (1,0) [-999999999|999999999] "" Vector__XXX
+
+BO_ 257 CAN101_Heading_Satelites: 5 Vector__XXX
+SG_ Satellites : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ Heading : 8|32@1- (1,0) [-999999999|9999999999] "" Vector__XXX
+
+BO_ 256 CAN100_Altitude_Time: 8 Vector__XXX
+SG_ Altitude : 0|32@1- (0.001,0) [-3.4E035|3.4E035] "" Vector__XXX
+SG_ Unix_time : 32|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+
+BA_DEF_  "BusType" STRING ;
+
+BA_DEF_DEF_  "BusType" "CAN";
+
+BA_ "BusType" "CAN";
+VAL_ 1027 DueServiceType 0 "No Service Requested" 1 "Initial service required" 2 "'A' Service Requested" 3 "'B' Service Requested" 4 "'C' Service Requested" 5 "'D' Service Requested" ;
+VAL_ 1812 JVMheartbeat 5 "Operational" 4 "Stopped" 127 "Preoperational" 0 "Bootup" 255 "Offline" ;
+
+SIG_VALTYPE_ 258 Longitude : 1;
+SIG_VALTYPE_ 258 Latitude : 1;
+SIG_VALTYPE_ 257 Heading : 1;
+SIG_VALTYPE_ 256 Altitude : 1;
