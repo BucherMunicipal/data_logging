@@ -29,7 +29,7 @@ def set_serial_number(config_data):
 
 
     # Create a CAN message decoder using the DBC file.
-    db = cantools.database.load_file('/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logged_can_signals_16_02_2023.DBC')  
+    db = cantools.database.load_file('/mnt/ssd-1/workspace/jetson-deepstream/bscripts/logging/logged_can_signals_25_07_2023.DBC')  
 
     bus = Bus()
 
