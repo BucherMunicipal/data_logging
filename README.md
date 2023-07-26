@@ -66,6 +66,8 @@ Create a pyenv virtual environment with the name ```AIPY```. Inside this venv in
 * **File overwrite**: if the logging is stopped and restarted in the same minute, the new videos and CAN log files overwrite the previous ones.
 
 * **Service restart**: if the logging service fails, it is automatically restarted after 30 seconds.
+
+* **Logging new CAN signals**: to log new CAN signals, the DBC file must be updated to include them, then `columns` list in [`log_can_msgs.py`](https://github.com/BucherMunicipal/data_logging/blob/main/can_logging/log_can_msgs.py)  must be updated to include the names of the new CAN signals. If the DBC file's name changes, remember to change it in the code. 
  
  
 
